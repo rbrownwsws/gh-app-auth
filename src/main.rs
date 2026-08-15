@@ -38,11 +38,11 @@ enum Commands {
 #[derive(Args)]
 struct AppCredentialsArgs {
     /// The App's Client ID (or App ID)
-    #[arg(short = 'c', long = "client-id", visible_alias = "app-id")]
+    #[arg(short = 'c', long = "client-id", visible_alias = "app-id", env = "GHAA_CLIENT_ID")]
     client_id: String,
 
     /// Path to the App's private key file (PEM format)
-    #[arg(short = 'k', long)]
+    #[arg(short = 'k', long, env = "GHAA_PRIVATE_KEY_FILE")]
     private_key_file: PathBuf,
 }
 
@@ -57,10 +57,10 @@ struct CreateInstallationAccessTokenArgs {
     #[command(flatten)]
     credentials: AppCredentialsArgs,
 
-    #[arg(short = 'i', long)]
+    #[arg(short = 'i', long, env = "GHAA_INSTALLATION_ID")]
     installation_id: u64,
 
-    #[arg(short = 'o', long)]
+    #[arg(short = 'o', long, env = "GHAA_OUT_FILE")]
     out_file: PathBuf,
 }
 
